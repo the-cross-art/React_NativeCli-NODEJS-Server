@@ -1,17 +1,18 @@
-const admin = require("../firebase");
 const User = require("../models/user");
+var jwt = require('jsonwebtoken');
 
 exports.authCheck = async (req, res, next) => {
   try {
-    const firebaseUser = await admin
-      .auth()
-      .verifyIdToken(req.headers.authtoken);
-
-    req.user = firebaseUser;
+    const token = req.header('auth-token')
+    console.log("token")
+    console.log(token)
+    if (!token) return res.status(403).send("Access Deneid")
+    var decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded._id;
     next();
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: "Invalid or expired token" });
+    res.status(401).send("Invalid or expired token")
   }
 };
 

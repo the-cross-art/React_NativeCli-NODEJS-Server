@@ -1,11 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const fs = require("fs");
 const cors = require("cors");
-require("dotenv").config();
-
-// app
+const seed = require("./seed");
 const app = express();
 
 // port
@@ -19,7 +18,10 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => {
+    seed()
+    console.log("Connected to MongoDB")
+  })
   .catch((err) => console.log(`DB connection error - ${err}`));
 
 // middlewares

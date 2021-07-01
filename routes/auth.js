@@ -6,13 +6,11 @@ const { authCheck, adminCheck } = require("../middlewares/auth");
 
 // controllers
 const {
-  createOrUpdateUser,
-  currentUser,
-  currentAdmin,
+  register,
+  login,
 } = require("../controllers/auth");
 
-router.post("/createOrUpdateUser", authCheck, createOrUpdateUser);
-router.post("/currentUser", authCheck, currentUser);
-router.post("/currentAdmin", authCheck, adminCheck, currentAdmin);
+router.post("/register", register);
+router.post("/login", login);
 
 module.exports = router;

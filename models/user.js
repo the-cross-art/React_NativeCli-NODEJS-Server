@@ -3,22 +3,41 @@ const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
+    fname: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    lname: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true
+    },
     email: {
       type: String,
       required: true,
-      index: true,
+      trim: true,
+      unique: true
     },
-    role: {
+    hashPassword: {
       type: String,
-      default: "subscriber",
+      required: true,
+      trim: true,
     },
-    cart: {
-      type: Array,
-      default: [],
-    },
-    address: String,
-    wishlist: [{ type: ObjectId, ref: "Product" }],
+    followers: [{
+      type: ObjectId,
+      ref: 'User'
+    }],
+    following: [{
+      type: ObjectId,
+      ref: 'User'
+    }],
   },
   { timestamps: true }
 );
