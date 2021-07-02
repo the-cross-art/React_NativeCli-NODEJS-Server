@@ -4,10 +4,8 @@ var jwt = require('jsonwebtoken');
 exports.authCheck = async (req, res, next) => {
   try {
     const token = req.header('auth-token')
-    console.log("token")
-    console.log(token)
     if (!token) return res.status(403).send("Access Deneid")
-    var decoded = jwt.verify(token, JWT_SECRET);
+    var decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded._id;
     next();
   } catch (error) {
