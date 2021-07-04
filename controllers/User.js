@@ -1,5 +1,15 @@
 const User = require("../models/user");
 
+exports.uploadProfilePic = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, { profileImage: req.body.url }, { new: true }).exec()
+        res.json(updatedUser)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json("User not found");
+    }
+};
+
 exports.myProfile = async (req, res) => {
     try {
         const foundUser = await User.findById(req.user).exec()

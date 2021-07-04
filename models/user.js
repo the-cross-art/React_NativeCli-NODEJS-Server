@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    profileImage: {
+      type: String,
+      trim: true
+    },
     username: {
       type: String,
       required: true,

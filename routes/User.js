@@ -8,11 +8,13 @@ const { authCheck, adminCheck } = require("../middlewares/auth");
 const {
     myProfile,
     SearchUser,
-    userSuggestions
+    userSuggestions,
+    uploadProfilePic
 } = require("../controllers/User");
 
 router.get("/my/profile", authCheck, myProfile);
 router.get("/search/user/profile", SearchUser);
 router.get("/profile/sugesstions/:value", userSuggestions);
+router.post("/:id/upload/profile", authCheck, uploadProfilePic);
 
 module.exports = router;
