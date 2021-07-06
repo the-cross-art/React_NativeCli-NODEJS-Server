@@ -10,9 +10,9 @@ const userSchema = Joi.object({
     address: Joi.object({
         fisrt_line: Joi.string().min(5).max(50).required(),
         second_line: Joi.string().allow('').optional(),
-        city: Joi.string().min(3).max(15).required(),
+        city: Joi.string().min(3).max(30).required(),
         pincode: Joi.number().required(),
-        country: Joi.string().min(3).max(20).required(),
+        country: Joi.string().min(3).max(30).required(),
     }).required(),
     password: Joi.string().min(3).max(40).required(),
 });
