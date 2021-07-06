@@ -3,6 +3,7 @@ const router = express.Router();
 
 // route middlewares
 const { authCheck, adminCheck } = require("../middlewares/auth");
+const { validateUser } = require("../middlewares/joi");
 
 // controllers
 const {
@@ -10,7 +11,7 @@ const {
   login,
 } = require("../controllers/auth");
 
-router.post("/register", register);
+router.post("/register", validateUser, register);
 router.post("/login", login);
 
 module.exports = router;

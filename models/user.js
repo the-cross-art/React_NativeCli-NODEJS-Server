@@ -29,6 +29,47 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true
     },
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true
+    },
+    address: {
+      fisrt_line: {
+        type: String,
+        trim: true,
+        required: true,
+        maxlength: 50,
+      },
+      second_line: {
+        type: String,
+        trim: true,
+        maxlength: 50,
+      },
+      city: {
+        type: String,
+        trim: true,
+        required: true,
+        maxlength: 15,
+      },
+      pincode: {
+        type: Number,
+        trim: true,
+        required: true,
+        maxlength: 10,
+      },
+      country: {
+        type: String,
+        trim: true,
+        required: true,
+        maxlength: 15,
+      },
+    },
+    interests: [{
+      type: String,
+      trim: true
+    }],
     hashPassword: {
       type: String,
       required: true,
@@ -42,6 +83,12 @@ const userSchema = new mongoose.Schema(
       type: ObjectId,
       ref: 'User'
     }],
+    posts: [{
+      category: {
+        type: ObjectId,
+        ref: 'Category'
+      },
+    }]
   },
   { timestamps: true }
 );
