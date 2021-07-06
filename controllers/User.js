@@ -10,6 +10,16 @@ exports.uploadProfilePic = async (req, res) => {
     }
 };
 
+exports.updateInterests = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, { interests: req.body.interests }, { new: true }).exec()
+        res.json(updatedUser)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json("User not found");
+    }
+};
+
 exports.myProfile = async (req, res) => {
     try {
         const foundUser = await User.findById(req.user).exec()
