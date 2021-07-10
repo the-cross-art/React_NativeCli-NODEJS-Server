@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const fs = require("fs");
 const cors = require("cors");
-const seed = require("./seed");
+// const seed = require("./seed");
 const app = express();
 
 // port
@@ -19,8 +19,8 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    seed()
-    console.log("Connected to MongoDB")
+    // seed()
+    console.log("Connected to MongoDB");
   })
   .catch((err) => console.log(`DB connection error - ${err}`));
 

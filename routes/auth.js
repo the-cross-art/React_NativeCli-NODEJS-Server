@@ -6,12 +6,10 @@ const { authCheck, adminCheck } = require("../middlewares/auth");
 const { validateUser } = require("../middlewares/joi");
 
 // controllers
-const {
-  register,
-  login,
-} = require("../controllers/auth");
+const { register, login, home } = require("../controllers/auth");
 
 router.post("/register", validateUser, register);
 router.post("/login", login);
+router.post("/home", home);
 
 module.exports = router;
