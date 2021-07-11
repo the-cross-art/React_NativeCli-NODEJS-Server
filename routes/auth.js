@@ -8,7 +8,7 @@ const { validateUser } = require("../middlewares/joi");
 // controllers
 const { register, login, home } = require("../controllers/auth");
 
-router.post("/register", validateUser, register);
+router.post("/register", register);
 router.post("/login", login);
 router.post("/home", home);
 

@@ -5,11 +5,9 @@ const userSchema = new mongoose.Schema(
   {
     firstname: {
       type: String,
-      trim: true,
     },
     lastname: {
       type: String,
-      trim: true,
     },
     // profileImage: {
     //   type: String,
@@ -17,13 +15,11 @@ const userSchema = new mongoose.Schema(
     // },
     username: {
       type: String,
-      required: true,
       trim: true,
       unique: true,
     },
     email: {
       type: String,
-      required: true,
       trim: true,
       unique: true,
     },
@@ -70,7 +66,6 @@ const userSchema = new mongoose.Schema(
     // }],
     hashPassword: {
       type: String,
-      required: true,
       trim: true,
     },
     // followers: [{
