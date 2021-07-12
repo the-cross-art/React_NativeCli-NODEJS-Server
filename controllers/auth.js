@@ -10,8 +10,9 @@ exports.register = async (req, res) => {
     const existUser = await User.findOne({ email });
     if (existUser) return res.status(403).json("User already exists");
     const salt = await bcrypt.genSalt(10);
-    let newPassword = password.toString();
-    const hash = await bcrypt.hash(newPassword, salt);
+    // let newPassword = password.toString();
+    const hash = await bcrypt.hash(password, salt);
+    console.log(hash);
     req.body.hashPassword = hash;
     const newUser = await new User(req.body).save();
     const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET);
@@ -24,22 +25,14 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  const { username, password } = req.body;
   try {
-    const existUser = await User.findOne({
-      $or: [
-        { email: req.body.value },
-        { username: req.body.value },
-        { phone: req.body.value },
-      ],
-    });
-    if (!existUser) return res.status(404).json("User not found");
-    const verify = await bcrypt.compare(
-      req.body.password,
-      existUser.hashPassword
-    );
+    const user = await User.findOne({ username });
+    if (!user) return res.status(404).json("User not found");
+    const verify = await bcrypt.compare(password, user.hashPassword);
     if (!verify) return res.status(404).json("Invalid password");
-    const token = jwt.sign({ _id: existUser._id }, process.env.JWT_SECRET);
-    res.json({ existUser, token });
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    res.json({ user, token });
   } catch (error) {
     res.status(404).json("User not found");
   }
