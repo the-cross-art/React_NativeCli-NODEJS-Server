@@ -38,7 +38,16 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.home = async (req, res) => {
-  console.log("successsss!!!!");
-  res.status(403).json("successsss!!!!");
+exports.tweets = async (req, res) => {
+  try {
+    console.log("trying to find");
+    const tweets = await Tweet.find({}).sort({ createdAt: -1 }).exec();
+    if (tweets) {
+      console.log(tweets);
+      res.json(tweets);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(404).send("No tweets found");
+  }
 };
